@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI PetroTech - Intelligent Oil & Gas Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-oil-can"></i>
+                <span>AI PetroTech</span>
+            </div>
+            <nav class="nav">
+                <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#well-logs" class="nav-link">Well Logs</a>
+                <a href="#drilling-risk" class="nav-link">Risk Analysis</a>
+                <a href="#geo-steering" class="nav-link">Geo-steering</a>
+                <a href="#settings" class="nav-link">Settings</a>
+            </nav>
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span>Demo User</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <div class="section-header">
+                    <h1>AI-Powered Petroleum Intelligence Dashboard</h1>
+                    <p>Advanced machine learning solutions for well log interpretation, drilling risk prediction, and reservoir navigation</p>
+                </div>
+
+                <!-- Key Metrics -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Active Wells</h3>
+                            <div class="metric-value">127</div>
+                            <div class="metric-change positive">+12% this month</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Risk Level</h3>
+                            <div class="metric-value">Low</div>
+                            <div class="metric-change positive">-23% risk reduction</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>Navigation Accuracy</h3>
+                            <div class="metric-value">96.8%</div>
+                            <div class="metric-change positive">+2.1% improvement</div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="metric-content">
+                            <h3>AI Predictions</h3>
+                            <div class="metric-value">1,247</div>
+                            <div class="metric-change positive">Real-time analysis</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature Overview Cards -->
+                <div class="feature-grid">
+                    <div class="feature-card" onclick="showSection('well-logs')">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-area"></i>
+                        </div>
+                        <h3>Well Log Interpretation</h3>
+                        <p>AI-powered analysis of well logs including gamma ray, resistivity, and porosity measurements with automated formation identification.</p>
+                        <div class="feature-stats">
+                            <span><i class="fas fa-eye"></i> 47 logs analyzed</span>
+                            <span><i class="fas fa-clock"></i> Real-time processing</span>
+                        </div>
+                    </div>
+                    <div class="feature-card" onclick="showSection('drilling-risk')">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Drilling Risk Prediction</h3>
+                        <p>Advanced machine learning models predict drilling hazards, equipment failures, and operational risks before they occur.</p>
+                        <div class="feature-stats">
+                            <span><i class="fas fa-chart-line"></i> 94% accuracy</span>
+                            <span><i class="fas fa-bell"></i> 23 active alerts</span>
+                        </div>
+                    </div>
+                    <div class="feature-card" onclick="showSection('geo-steering')">
+                        <div class="feature-icon">
+                            <i class="fas fa-route"></i>
+                        </div>
+                        <h3>Reservoir Navigation</h3>
+                        <p>Real-time geo-steering with 3D reservoir modeling and optimal drilling path recommendations using AI algorithms.</p>
+                        <div class="feature-stats">
+                            <span><i class="fas fa-crosshairs"></i> GPS precision</span>
+                            <span><i class="fas fa-cube"></i> 3D visualization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Well Log Interpretation Section -->
+        <section id="well-logs" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>AI Well Log Interpretation</h1>
+                    <p>Advanced machine learning analysis of well logging data</p>
+                    <button class="btn-primary" onclick="runWellLogAnalysis()">
+                        <i class="fas fa-play"></i> Run AI Analysis
+                    </button>
+                </div>
+
+                <div class="well-logs-grid">
+                    <div class="log-viewer">
+                        <h3>Well Log Visualization</h3>
+                        <div class="chart-container">
+                            <canvas id="wellLogChart" style="height: 400px;"></canvas>
+                        </div>
+                    </div>
+                    <div class="ai-analysis">
+                        <h3>AI Formation Analysis</h3>
+                        <div class="analysis-results">
+                            <div class="formation-item">
+                                <div class="formation-name">Sandstone Formation</div>
+                                <div class="formation-depth">2,150 - 2,340 ft</div>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: 92%"></div>
+                                    <span>92% confidence</span>
+                                </div>
+                            </div>
+                            <div class="formation-item">
+                                <div class="formation-name">Shale Layer</div>
+                                <div class="formation-depth">2,340 - 2,480 ft</div>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: 87%"></div>
+                                    <span>87% confidence</span>
+                                </div>
+                            </div>
+                            <div class="formation-item">
+                                <div class="formation-name">Limestone Formation</div>
+                                <div class="formation-depth">2,480 - 2,650 ft</div>
+                                <div class="confidence-bar">
+                                    <div class="confidence-fill" style="width: 94%"></div>
+                                    <span>94% confidence</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="well-data-table">
+                    <h3>Well Log Data</h3>
+                    <table id="wellLogsTable" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Depth (ft)</th>
+                                <th>Gamma Ray (API)</th>
+                                <th>Resistivity (Ω·m)</th>
+                                <th>Porosity (%)</th>
+                                <th>AI Formation</th>
+                                <th>Confidence</th>
+                            </tr>
+                        </thead>
+                        <tbody id="wellLogsTableBody">
+                            <!-- Data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Drilling Risk Prediction Section -->
+        <section id="drilling-risk" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Drilling Risk Prediction</h1>
+                    <p>AI-powered risk assessment and mitigation strategies</p>
+                    <button class="btn-primary" onclick="runRiskAnalysis()">
+                        <i class="fas fa-shield-alt"></i> Analyze Risk
+                    </button>
+                </div>
+
+                <div class="risk-dashboard">
+                    <div class="risk-overview">
+                        <div class="risk-gauge">
+                            <canvas id="riskGauge" width="300" height="200"></canvas>
+                            <div class="risk-level">Current Risk: <span id="currentRiskLevel">LOW</span></div>
+                        </div>
+                        <div class="risk-factors">
+                            <h3>Risk Factors</h3>
+                            <div class="risk-factor">
+                                <span class="factor-name">Equipment Failure</span>
+                                <div class="risk-bar low">
+                                    <div class="risk-fill" style="width: 15%"></div>
+                                </div>
+                                <span class="risk-percentage">15%</span>
+                            </div>
+                            <div class="risk-factor">
+                                <span class="factor-name">Wellbore Instability</span>
+                                <div class="risk-bar medium">
+                                    <div class="risk-fill" style="width: 35%"></div>
+                                </div>
+                                <span class="risk-percentage">35%</span>
+                            </div>
+                            <div class="risk-factor">
+                                <span class="factor-name">Lost Circulation</span>
+                                <div class="risk-bar low">
+                                    <div class="risk-fill" style="width: 20%"></div>
+                                </div>
+                                <span class="risk-percentage">20%</span>
+                            </div>
+                            <div class="risk-factor">
+                                <span class="factor-name">Kick/Blowout</span>
+                                <div class="risk-bar low">
+                                    <div class="risk-fill" style="width: 8%"></div>
+                                </div>
+                                <span class="risk-percentage">8%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="risk-chart">
+                        <h3>Risk Prediction Timeline</h3>
+                        <div class="chart-container">
+                            <canvas id="riskTimelineChart" style="height: 300px;"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-alerts">
+                    <h3>Active Risk Alerts</h3>
+                    <div class="alerts-container">
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div class="alert-content">
+                                <h4>Medium Risk: Wellbore Instability</h4>
+                                <p>AI model detected potential instability at depth 2,850 ft. Recommend mud weight adjustment.</p>
+                                <span class="alert-time">2 hours ago</span>
+                            </div>
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <div class="alert-content">
+                                <h4>Information: Equipment Maintenance</h4>
+                                <p>Predictive maintenance suggests drill bit replacement in next 48 hours for optimal performance.</p>
+                                <span class="alert-time">4 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Geo-steering Section -->
+        <section id="geo-steering" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>Reservoir Navigation & Geo-steering</h1>
+                    <p>Real-time 3D reservoir modeling and optimal drilling path guidance</p>
+                    <button class="btn-primary" onclick="optimizeRoute()">
+                        <i class="fas fa-route"></i> Optimize Route
+                    </button>
+                </div>
+
+                <div class="geo-steering-grid">
+                    <div class="reservoir-3d">
+                        <h3>3D Reservoir Model</h3>
+                        <div id="threejs-container" class="three-container">
+                            <!-- 3D visualization will be rendered here -->
+                        </div>
+                        <div class="model-controls">
+                            <button onclick="resetView()"><i class="fas fa-home"></i> Reset View</button>
+                            <button onclick="toggleWireframe()"><i class="fas fa-cube"></i> Wireframe</button>
+                            <button onclick="showTargetZone()"><i class="fas fa-bullseye"></i> Target Zone</button>
+                        </div>
+                    </div>
+
+                    <div class="navigation-panel">
+                        <h3>Navigation Control</h3>
+                        <div class="nav-metrics">
+                            <div class="nav-metric">
+                                <label>Current Depth:</label>
+                                <span id="currentDepth">2,847 ft</span>
+                            </div>
+                            <div class="nav-metric">
+                                <label>Target Distance:</label>
+                                <span id="targetDistance">1,247 ft</span>
+                            </div>
+                            <div class="nav-metric">
+                                <label>Azimuth:</label>
+                                <span id="azimuth">045°</span>
+                            </div>
+                            <div class="nav-metric">
+                                <label>Inclination:</label>
+                                <span id="inclination">12.5°</span>
+                            </div>
+                        </div>
+
+                        <div class="steering-recommendations">
+                            <h4>AI Steering Recommendations</h4>
+                            <div class="recommendation">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Adjust azimuth by +5° at next survey point</span>
+                            </div>
+                            <div class="recommendation">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>Increase inclination to 15° for optimal trajectory</span>
+                            </div>
+                            <div class="recommendation">
+                                <i class="fas fa-clock"></i>
+                                <span>Maintain current drilling parameters for 200 ft</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="trajectory-chart">
+                    <h3>Well Trajectory Analysis</h3>
+                    <div class="chart-container">
+                        <canvas id="trajectoryChart" style="height: 300px;"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1>AI Model Settings</h1>
+                    <p>Configure AI parameters and model preferences</p>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Well Log AI Model</h3>
+                        <div class="setting-item">
+                            <label>Model Version:</label>
+                            <select>
+                                <option>PetroNet v3.2 (Recommended)</option>
+                                <option>PetroNet v3.1</option>
+                                <option>Legacy Model v2.8</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Confidence Threshold:</label>
+                            <input type="range" min="0.5" max="1.0" step="0.05" value="0.85">
+                            <span>85%</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Risk Prediction Model</h3>
+                        <div class="setting-item">
+                            <label>Prediction Horizon:</label>
+                            <select>
+                                <option>24 hours</option>
+                                <option>48 hours (Recommended)</option>
+                                <option>72 hours</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Alert Sensitivity:</label>
+                            <input type="range" min="1" max="10" value="7">
+                            <span>High</span>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Geo-steering Parameters</h3>
+                        <div class="setting-item">
+                            <label>Update Frequency:</label>
+                            <select>
+                                <option>Real-time (Recommended)</option>
+                                <option>Every 5 minutes</option>
+                                <option>Every 15 minutes</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Trajectory Optimization:</label>
+                            <input type="checkbox" checked>
+                            <span>Enable AI optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
